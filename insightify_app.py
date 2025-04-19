@@ -14,12 +14,49 @@ sns.set(style="whitegrid")
 # ===============================
 # 1. 📥 BACA DATA
 # ===============================
-@st.cache_data
-def load_data():
+#@st.cache_data
+#def load_data():
     # Mengganti dengan file yang sesuai (misalnya file csv yang sudah ada)
-    df = pd.read_csv('analisis_bumi.csv')  # Gantilah dengan file yang sesuai
-    return df
+ #   df = pd.read_csv('analisis_bumi.csv')  # Gantilah dengan file yang sesuai
+ #   return df
+# ===============================
+# 📥 Unggah Data CSV
+# ===============================
+# 📥 Unggah Data CSV (Laptop & Mobile)
+# ===============================
+st.sidebar.header("📥 Unggah Data / Masukkan Link")
 
+# Unggah file (laptop)
+uploaded_file = st.sidebar.file_uploader("Pilih file CSV dari perangkat", type=["csv"])
+
+# Link alternatif (mobile)
+csv_url = st.sidebar.text_input("Atau masukkan link file CSV (Google Drive, Dropbox, dll)")
+
+df = None  # Inisialisasi
+
+# Deteksi dari unggahan
+if uploaded_file is not None:
+    try:
+        df = pd.read_csv(uploaded_file)
+        st.success("✅ File berhasil diunggah dari perangkat.")
+    except Exception as e:
+        st.error(f"❌ Gagal membaca file: {e}")
+
+# Deteksi dari URL
+elif csv_url:
+    try:
+        df = pd.read_csv(csv_url)
+        st.success("✅ File berhasil dimuat dari link.")
+    except Exception as e:
+        st.error(f"❌ Gagal memuat dari link: {e}")
+
+# Notifikasi kalau belum ada data
+if df is None:
+    st.info("""
+    📌 Kamu bisa unggah file CSV dari **laptop** atau tempel **link file CSV** dari Google Drive, Dropbox, atau lainnya.
+
+    ⚠️ *Di HP, tombol unggah kadang hanya menampilkan gambar/video — gunakan link file sebagai alternatif.*
+    """)
 df = load_data()
 
 # Tampilkan beberapa data awal
