@@ -12,14 +12,39 @@ plt.rcParams['axes.labelsize'] = 12
 sns.set(style="whitegrid")
 
 # ===============================
-# 1. 📥 BACA DATA
+# 📥 BACA DATA (DEFAULT)
 # ===============================
 @st.cache_data
-def load_data():
-    # Mengganti dengan file yang sesuai (misalnya file csv yang sudah ada)
-    df = pd.read_csv('analisis_bumi.csv')  # Gantilah dengan file yang sesuai
+def load_default_data():
+    df = pd.read_csv('analisis_bumi.csv')  # Default
     return df
-df = load_data()
+
+# ===============================
+# 📤 UPLOAD DATA (OPSIONAL)
+# ===============================
+uploaded_file = st.file_uploader("📥 Upload file CSV hasil survei", type=["csv"])
+
+if uploaded_file:
+    try:
+        df = pd.read_csv(uploaded_file)
+        st.success("✅ File berhasil di-upload!")
+    except Exception as e:
+        st.error(f"❌ Gagal membaca file: {e}")
+        st.stop()
+else:
+    st.info("📁 Menggunakan file default 'analisis_bumi.csv'")
+    df = load_default_data()
+
+# ===============================
+# ✅ CEK KEBERHASILAN DATA
+# ===============================
+if df is None or df.empty:
+    st.error("❌ Data tidak tersedia atau kosong.")
+    st.stop()
+
+# Tampilkan data awal
+st.subheader("📋 Data Responden")
+st.dataframe(df.head())
     
 # Tampilkan beberapa data awal
 st.title("📊 Analisis Survei Terbuka (Professional)")
