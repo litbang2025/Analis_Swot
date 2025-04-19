@@ -26,9 +26,6 @@ df = load_data()
 st.title("📊 Analisis Survei Terbuka (Professional)")
 st.subheader("Data Awal:")
 st.write(df.head())
-st.write(df.head())  # Pastikan data terbaca
-st.write(df.columns)  # Tampilkan nama kolom
-
 # ===============================
 # 2. ℹ️ INFORMASI DASAR
 # ===============================
