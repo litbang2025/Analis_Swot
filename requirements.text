@@ -1,7 +1,0 @@
-streamlit
-pandas
-numpy
-matplotlib.pyplot as plt
-seaborn as sns
-Counter
-WordCloud
