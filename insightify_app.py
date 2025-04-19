@@ -29,7 +29,12 @@ if uploaded_file:
     
     st.subheader("📋 Data Response")
     st.dataframe(df.head())
-
+@st.cache_data
+def load_data():
+    #Mengganti dengan file yang sesuai (misalnya file csv yang sudah ada)
+    df = pd.read_csv('analisis_bumi.csv')  # Gantilah dengan file yang sesuai
+    return df
+    
 # Tampilkan beberapa data awal
 st.title("📊 Analisis Survei Terbuka (Professional)")
 st.subheader("Data Awal:")
