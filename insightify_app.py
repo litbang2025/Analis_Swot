@@ -17,7 +17,7 @@ sns.set(style="whitegrid")
 @st.cache_data
 def load_default_data():
     df = pd.read_csv('analisis_bumi.csv')  # Default
-    return df
+   # return df
 
 # ===============================
 # 📤 UPLOAD DATA (OPSIONAL)
