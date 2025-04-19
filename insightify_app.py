@@ -24,16 +24,22 @@ sns.set(style="whitegrid")
 # ===============================
 # Upload File
 uploaded_file = st.file_uploader("📥 Upload file CSV hasil survei", type=["csv"])
+
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
-    
-    st.subheader("📋 Data Response")
-    st.dataframe(df.head())
-@st.cache_data
-def load_data():
-    #Mengganti dengan file yang sesuai (misalnya file csv yang sudah ada)
-    df = pd.read_csv('analisis_bumi.csv')  # Gantilah dengan file yang sesuai
-    return df
+    st.success("✅ File CSV berhasil di-upload dan dibaca.")
+else:
+    st.info("📁 Menggunakan file default 'analisis_bumi.csv'.")
+    df = load_data_from_default()
+
+# Validasi jika gagal
+if df is None or df.empty:
+    st.error("❌ Gagal memuat data. Pastikan file tidak kosong atau salah format.")
+    st.stop()
+
+# Lanjutkan visualisasi setelah data aman
+st.subheader("📋 Data Response")
+st.dataframe(df.head())
     
 # Tampilkan beberapa data awal
 st.title("📊 Analisis Survei Terbuka (Professional)")
