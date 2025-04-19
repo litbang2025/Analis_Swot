@@ -14,11 +14,12 @@ sns.set(style="whitegrid")
 # ===============================
 # 1. 📥 BACA DATA
 # ===============================
-#@st.cache_data
-#def load_data():
+@st.cache_data
+def load_data():
     # Mengganti dengan file yang sesuai (misalnya file csv yang sudah ada)
- #   df = pd.read_csv('analisis_bumi.csv')  # Gantilah dengan file yang sesuai
- #   return df
+    df = pd.read_csv('analisis_bumi.csv')  # Gantilah dengan file yang sesuai
+    return df
+df = load_data()
 # ===============================
 # 📥 Unggah Data CSV
 # ===============================
